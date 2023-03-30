@@ -17,6 +17,9 @@ const college = ref([])
 const collegeValue = ref('')
 
 watchEffect(() => {
+  if (schoolValue.value === '') {
+    return
+  }
   requests.get('/v1/college?school=' + schoolValue.value).then(res => {
     college.value = []
     collegeValue.value = ''
