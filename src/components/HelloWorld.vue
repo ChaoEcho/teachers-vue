@@ -68,7 +68,13 @@ function clearSelect() {
 </script>
 
 <template>
-  <el-select v-model="schoolValue" class="m-2" multiple placeholder="学校" size="large">
+  <el-select
+      v-model="schoolValue"
+      class="m-2"
+      multiple
+      placeholder="学校"
+      size="large"
+      style="width: 250px">
     <el-option
         v-for="item in schools"
         :key="item.value"
@@ -83,7 +89,8 @@ function clearSelect() {
       class="m-2"
       multiple
       placeholder="学院"
-      size="large">
+      size="large"
+      style="width: 250px">
     <el-option
         v-for="item in college"
         :key="item.value"
@@ -135,12 +142,11 @@ function clearSelect() {
   <el-button plain size="large" type="primary" @click="queryTeacher">查询</el-button>
   <el-button plain size="large" type="danger" @click="clearSelect">清除</el-button>
   <el-table :data="teachers" style="width: 100%">
-    <el-table-column label="学校" prop="school" width="180"/>
-    <el-table-column label="学院" prop="college" width="180"/>
-    <el-table-column label="姓名" prop="name" width="180"/>
-    <el-table-column label="链接" prop="url">
+    <el-table-column label="学校" prop="school"/>
+    <el-table-column label="学院" prop="college"/>
+    <el-table-column label="姓名" prop="name">
       <template #default="{row}">
-        <a :href="row.url" target="_blank">{{ row.url }}</a>
+        <a :href="row.url" target="_blank">{{ row.name }}</a>
       </template>
     </el-table-column>
   </el-table>

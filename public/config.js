@@ -1,3 +1,3 @@
 window.envs = {
-    BASE_IP: 'http://127.0.0.1:8080',
+    BASE_IP: 'http://192.168.31.37:8080',
 }
