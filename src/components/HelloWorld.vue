@@ -3,7 +3,7 @@ import {ref, watchEffect} from 'vue'
 import requests from "../api/requests.js";
 
 const schools = ref([])
-const schoolValue = ref('')
+const schoolValue = ref([])
 requests.get('/v1/school').then(res => {
   for (let index in res.data) {
     schools.value.push({
@@ -14,15 +14,15 @@ requests.get('/v1/school').then(res => {
 })
 
 const college = ref([])
-const collegeValue = ref('')
+const collegeValue = ref([])
 
 watchEffect(() => {
-  if (schoolValue.value === '') {
+  if (schoolValue.value.length === 0 || [] === schoolValue.value) {
     return
   }
   requests.get('/v1/college?school=' + schoolValue.value).then(res => {
     college.value = []
-    collegeValue.value = ''
+    collegeValue.value = []
     for (let index in res.data) {
       college.value.push({
         label: res.data[index],
@@ -57,8 +57,8 @@ function queryTeacher() {
 }
 
 function clearSelect() {
-  schoolValue.value = ''
-  collegeValue.value = ''
+  schoolValue.value = []
+  collegeValue.value = []
   andValue.value = []
   notValue.value = []
   teachers.value = []
@@ -68,7 +68,7 @@ function clearSelect() {
 </script>
 
 <template>
-  <el-select v-model="schoolValue" class="m-2" placeholder="学校" size="large">
+  <el-select v-model="schoolValue" class="m-2" multiple placeholder="学校" size="large">
     <el-option
         v-for="item in schools"
         :key="item.value"
@@ -77,7 +77,13 @@ function clearSelect() {
     />
   </el-select>
 
-  <el-select v-model="collegeValue" class="m-2" placeholder="学院" size="large">
+  <el-select
+      v-model="collegeValue"
+      :disabled="schoolValue.length !== 1"
+      class="m-2"
+      multiple
+      placeholder="学院"
+      size="large">
     <el-option
         v-for="item in college"
         :key="item.value"
@@ -116,6 +122,7 @@ function clearSelect() {
       multiple
       placeholder="排除词汇"
       size="large"
+      style="width: 250px"
   >
     <el-option
         v-for="item in notValue"
