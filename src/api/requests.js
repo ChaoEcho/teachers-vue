@@ -6,7 +6,8 @@ import "nprogress/nprogress.css";
 
 const requests = axios.create({
     //baseURL: localStorage.getItem("baseURL"),
-    baseURL: "http://127.0.0.1:8080",
+    //baseURL: 'http://localhost:8080',
+    baseURL: window.envs.BASE_IP,
     timeout: 10 * 1000
 })
 
