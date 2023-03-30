@@ -1,4 +1,5 @@
 <script setup>
+import {View as IconView} from '@element-plus/icons-vue'
 import {ref, watchEffect} from 'vue'
 import requests from "../api/requests.js";
 
@@ -146,7 +147,12 @@ function clearSelect() {
     <el-table-column label="学院" prop="college"/>
     <el-table-column label="姓名" prop="name">
       <template #default="{row}">
-        <a :href="row.url" target="_blank">{{ row.name }}</a>
+        <el-link :href="row.url" target="_blank">
+          <el-icon class="el-icon--right">
+            <icon-view/>
+          </el-icon>
+          {{ row.name }}
+        </el-link>
       </template>
     </el-table-column>
   </el-table>
