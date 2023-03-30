@@ -96,6 +96,7 @@ function clearSelect() {
       multiple
       placeholder="包含词汇"
       size="large"
+      style="width: 250px"
   >
     <el-option
         v-for="item in andValue"
